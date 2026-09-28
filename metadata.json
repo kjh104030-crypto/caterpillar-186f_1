@@ -1,0 +1,6 @@
+{
+  "name": "Caterpillar-186f Archive | 명일방주 스타일 세계관 아카이브",
+  "description": "게임 명일방주 특유의 테크니컬 다크 UI 스타일로 구현된 케터펄러-186f 세계관 데이터베이스 및 아카이브 플랫폼",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

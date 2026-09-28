@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: 'Chakra Petch', 'Rajdhani', sans-serif;
+    --font-body: 'Noto Sans KR', sans-serif;
+    --font-mono: 'Rajdhani', monospace, tabular-nums;
+  }
+  
+  body {
+    font-family: var(--font-body);
+    background-color: #0b0e14;
+    color: #e2e8f0;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, .font-heading {
+    font-family: var(--font-heading);
+    letter-spacing: 0.03em;
+  }
+}
+
+/* Subtle Tactical Scanlines & Grid */
+.bg-tactical-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.bg-dot-matrix {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.bg-hazard-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(245, 166, 35, 0.12),
+    rgba(245, 166, 35, 0.12) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
+
+.bg-hazard-stripes-cyan {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(0, 229, 255, 0.1),
+    rgba(0, 229, 255, 0.1) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
+
+/* Arknights Chamfered / Angled Corner Cuts */
+.cut-corner-br {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+}
+
+.cut-corner-tl {
+  clip-path: polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px);
+}
+
+.cut-corner-both {
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+}
+
+/* Tactical Rhombic Tag Cut */
+.tag-notch {
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+}
+
+/* Glitch Animation Class - Triggers on initial hover entry and runs once */
+@keyframes subtle-glitch {
+  0% {
+    transform: translate(0);
+    text-shadow: none;
+  }
+  15% {
+    transform: translate(-1.5px, 0.8px);
+    text-shadow: -1.5px 0 #00e5ff, 1.5px 0 #ff4d4f;
+  }
+  30% {
+    transform: translate(1.5px, -0.8px);
+    text-shadow: 1.5px 0 #00e5ff, -1.5px 0 #f5a623;
+  }
+  45% {
+    transform: translate(-0.8px, -0.8px);
+    text-shadow: -1px 0 #00e5ff, 1px 0 #ff4d4f;
+  }
+  60% {
+    transform: translate(0.8px, 0.8px);
+    text-shadow: 1px 0 #00e5ff, -1px 0 #ff4d4f;
+  }
+  80% {
+    transform: translate(-0.4px, 0.4px);
+    text-shadow: -0.5px 0 #00e5ff, 0.5px 0 #f5a623;
+  }
+  100% {
+    transform: translate(0);
+    text-shadow: none;
+  }
+}
+
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text:hover {
+  animation: subtle-glitch 0.35s ease-out 1 forwards;
+}
+
+.glitch-hover:hover {
+  position: relative;
+  display: inline-block;
+  animation: subtle-glitch 0.35s ease-out 1 forwards;
+}
+
+
+/* Custom Scrollbar for dark tactical feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0e14;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e2636;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00e5ff;
+}
+
+/* CRT Scanline Beam Animation */
+@keyframes scanline-sweep {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+.animate-scanline {
+  animation: scanline-sweep 2s linear infinite;
+}
+
+/* Tactical Terminal Flicker */
+@keyframes terminal-flicker {
+  0% {
+    opacity: 0.94;
+  }
+  10% {
+    opacity: 0.78;
+  }
+  15% {
+    opacity: 0.98;
+  }
+  25% {
+    opacity: 0.85;
+  }
+  30% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.88;
+  }
+  65% {
+    opacity: 0.96;
+  }
+  80% {
+    opacity: 0.82;
+  }
+  90% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0.92;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.terminal-flicker {
+  animation: terminal-flicker 0.4s ease-in-out;
+}
+
