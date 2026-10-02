@@ -1,8 +1,8 @@
 export type WorldSection = 'overview' | 'factions' | 'characters' | 'glossary';
 
-export type RaceType = '알토' | '콘트랄토' | '앤스' | '아페' | '케토' | '하레' | '피를레크' | '소그' | '인간' | '혼혈종' | '기타';
+export type RaceType = '알토' | '콘트랄토' | '스마우토' | '앤스' | '아페' | '야레츠' | '소그' | '케토' | '하레' | '피를레크' | '인간' | '혼혈종' | '기타';
 
-export type FactionCityId = 'caherdin' | 'agravain' | 'esperanto' | 'geococcyx' | 'firva' | 'chinoiserie' | 'independent';
+export type FactionCityId = 'caherdin' | 'agravain' | 'esperanto' | 'geococcyx' | 'firva' | 'chinoiserie' | 'mukri' | 'ahente' | 'nashdom' | 'independent';
 
 export interface DefenseOrganization {
   name: string;
@@ -73,6 +73,7 @@ export interface CharacterArchiveItem {
   collapseTolerance: 'S' | 'A' | 'B' | 'C' | 'D' | 'UNKNOWN';
   status: 'ACTIVE' | 'MONITORING' | 'RETIRED' | 'MIA' | 'EMPTY_SLOT';
   securityClearance: 1 | 2 | 3 | 4 | 5;
+  bioTitle?: string; // 예: '지옵콕스 면담 기록' (기본: '신상 명세 및 배경 기록')
   bioNotes: string;
   combatLog: string;
   isTemplate?: boolean;

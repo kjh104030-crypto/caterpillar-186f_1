@@ -59,6 +59,12 @@ export const CharacterRegisterModal: React.FC<CharacterRegisterModalProps> = ({
           ? '피르바'
           : newChar.factionId === 'chinoiserie'
           ? '시누아즈리'
+          : newChar.factionId === 'mukri'
+          ? '무크리'
+          : newChar.factionId === 'ahente'
+          ? '아헨테'
+          : newChar.factionId === 'nashdom'
+          ? '나슈돔'
           : '소속 미정',
       race: (newChar.race as RaceType) || '기타',
       gender: newChar.gender || '미지정',
@@ -140,6 +146,9 @@ export const CharacterRegisterModal: React.FC<CharacterRegisterModalProps> = ({
                 <option value="geococcyx">지옵콕스 (독립 이동 기지)</option>
                 <option value="firva">피르바 (사카나 자경대)</option>
                 <option value="chinoiserie">시누아즈리 (요아 공병단)</option>
+                <option value="mukri">무크리 (고라이 방호대)</option>
+                <option value="ahente">아헨테 (슈흘리카 방위대)</option>
+                <option value="nashdom">나슈돔 (프롯스자시트)</option>
                 <option value="independent">소속 미정</option>
               </select>
             </div>
@@ -153,8 +162,10 @@ export const CharacterRegisterModal: React.FC<CharacterRegisterModalProps> = ({
               >
                 <option value="알토">알토 (날개)</option>
                 <option value="콘트랄토">콘트랄토 (여성 알토)</option>
+                <option value="스마우토">스마우토 (귀깃 날개 알토 분파)</option>
                 <option value="앤스">앤스 (수인)</option>
                 <option value="아페">아페 (각인종)</option>
+                <option value="야레츠">야레츠 (전투 특화 아페 분파)</option>
                 <option value="소그">소그 (광산 특화 아페 분파)</option>
                 <option value="케토">케토 (용인종)</option>
                 <option value="하레">하레 (4완/내성)</option>

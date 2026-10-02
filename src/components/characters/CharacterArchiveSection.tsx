@@ -13,33 +13,99 @@ import { CharacterCard } from './CharacterCard';
 import { CharacterDetailModal } from './CharacterDetailModal';
 import { CharacterRegisterModal } from './CharacterRegisterModal';
 
-const OPERATORS_STORAGE_KEY = 'caterpillar_operator_archive_v4';
+const OPERATORS_STORAGE_KEY = 'caterpillar_operator_archive_v8';
 
 export const CharacterArchiveSection: React.FC = () => {
   const [characters, setCharacters] = useState<CharacterArchiveItem[]>(() => {
     try {
-      const saved = localStorage.getItem(OPERATORS_STORAGE_KEY) || localStorage.getItem('caterpillar_operator_archive_v3');
+      const saved = localStorage.getItem(OPERATORS_STORAGE_KEY) || 
+                    localStorage.getItem('caterpillar_operator_archive_v7') || 
+                    localStorage.getItem('caterpillar_operator_archive_v6') || 
+                    localStorage.getItem('caterpillar_operator_archive_v5') || 
+                    localStorage.getItem('caterpillar_operator_archive_v4') || 
+                    localStorage.getItem('caterpillar_operator_archive_v3');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Check if Velox exists in parsed, if not inject Velox from TEMPLATE_CHARACTERS
+          const yonaTemplate = TEMPLATE_CHARACTERS.find((c) => c.name === '요나');
+          const veloxTemplate = TEMPLATE_CHARACTERS.find((c) => c.name === '벨록스');
+          const gebelTemplate = TEMPLATE_CHARACTERS.find((c) => c.name === '게벨');
+          const phoennonTemplate = TEMPLATE_CHARACTERS.find((c) => c.name === '프에논');
+          const elpiusTemplate = TEMPLATE_CHARACTERS.find((c) => c.name === '엘피우스');
+
           const hasVelox = parsed.some((c: CharacterArchiveItem) => c.name === '벨록스' || c.codeName.includes('벨록스'));
-          const updated = parsed.map((c: CharacterArchiveItem) => {
+          const hasGebel = parsed.some((c: CharacterArchiveItem) => c.name === '게벨' || c.codeName.includes('게벨'));
+          const hasPhoennon = parsed.some((c: CharacterArchiveItem) => c.name === '프에논' || c.codeName.includes('프에논'));
+          const hasElpius = parsed.some((c: CharacterArchiveItem) => c.name === '엘피우스' || c.codeName.includes('엘피우스'));
+
+          let updated = parsed.map((c: CharacterArchiveItem) => {
             if (c.name?.includes('요나') || c.id === 'CHAR-CAT-001') {
               return {
                 ...c,
-                imageUrl: c.imageUrl || TEMPLATE_CHARACTERS[0].imageUrl
+                imageUrl: c.imageUrl || (yonaTemplate ? yonaTemplate.imageUrl : TEMPLATE_CHARACTERS[0].imageUrl),
+                bioTitle: yonaTemplate?.bioTitle,
+                bioNotes: yonaTemplate?.bioNotes || c.bioNotes
+              };
+            }
+            if (c.name === '벨록스' && veloxTemplate) {
+              return {
+                ...c,
+                bioTitle: veloxTemplate.bioTitle,
+                bioNotes: veloxTemplate.bioNotes
+              };
+            }
+            if (c.name === '게벨' && gebelTemplate) {
+              return {
+                ...c,
+                ...gebelTemplate
+              };
+            }
+            if (c.name === '프에논' && phoennonTemplate) {
+              return {
+                ...c,
+                ...phoennonTemplate
+              };
+            }
+            if (c.name === '엘피우스' && elpiusTemplate) {
+              return {
+                ...c,
+                ...elpiusTemplate
               };
             }
             return c;
           });
 
-          if (!hasVelox) {
-            const veloxItem = TEMPLATE_CHARACTERS.find((c) => c.name === '벨록스');
-            if (veloxItem) {
-              return [updated[0], veloxItem, ...updated.slice(1)];
+          if (!hasVelox && veloxTemplate) {
+            updated = [updated[0], veloxTemplate, ...updated.slice(1)];
+          }
+
+          if (!hasGebel && gebelTemplate) {
+            const veloxIdx = updated.findIndex((c) => c.name === '벨록스');
+            if (veloxIdx !== -1) {
+              updated.splice(veloxIdx + 1, 0, gebelTemplate);
+            } else {
+              updated.push(gebelTemplate);
             }
           }
+
+          if (!hasPhoennon && phoennonTemplate) {
+            const gebelIdx = updated.findIndex((c) => c.name === '게벨');
+            if (gebelIdx !== -1) {
+              updated.splice(gebelIdx + 1, 0, phoennonTemplate);
+            } else {
+              updated.push(phoennonTemplate);
+            }
+          }
+
+          if (!hasElpius && elpiusTemplate) {
+            const phoennonIdx = updated.findIndex((c) => c.name === '프에논');
+            if (phoennonIdx !== -1) {
+              updated.splice(phoennonIdx + 1, 0, elpiusTemplate);
+            } else {
+              updated.push(elpiusTemplate);
+            }
+          }
+
           return updated;
         }
       }
@@ -72,14 +138,19 @@ export const CharacterArchiveSection: React.FC = () => {
     { id: 'geococcyx', label: '지옵콕스' },
     { id: 'firva', label: '피르바' },
     { id: 'chinoiserie', label: '시누아즈리' },
+    { id: 'mukri', label: '무크리' },
+    { id: 'ahente', label: '아헨테' },
+    { id: 'nashdom', label: '나슈돔' },
     { id: 'independent', label: '소속 미정' }
   ];
 
   const races: { id: string; label: string }[] = [
     { id: 'all', label: '전체 종족' },
     { id: '알토', label: '알토' },
+    { id: '스마우토', label: '스마우토' },
     { id: '앤스', label: '앤스' },
     { id: '아페', label: '아페' },
+    { id: '야레츠', label: '야레츠' },
     { id: '소그', label: '소그' },
     { id: '케토', label: '케토' },
     { id: '하레', label: '하레' },
@@ -106,7 +177,12 @@ export const CharacterArchiveSection: React.FC = () => {
         char.bioNotes.toLowerCase().includes(query);
 
       const matchesFaction = selectedFaction === 'all' || char.factionId === selectedFaction;
-      const matchesRace = selectedRace === 'all' || char.race === selectedRace;
+      const matchesRace =
+        selectedRace === 'all' ||
+        char.race === selectedRace ||
+        char.subRace === selectedRace ||
+        (selectedRace === '아페' && (char.race === '아페' || char.race === '야레츠' || char.race === '소그')) ||
+        (selectedRace === '알토' && (char.race === '알토' || char.race === '스마우토' || char.race === '콘트랄토'));
       const matchesOrlando =
         selectedOrlando === 'all' ||
         (selectedOrlando === 'equipped' && char.orlandoWeapon.hasOrlando) ||

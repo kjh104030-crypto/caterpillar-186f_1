@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Building2, Wrench, Compass, Radio, Anchor, Pickaxe, Activity } from 'lucide-react';
+import { Building2, Wrench, Compass, Radio, Anchor, Pickaxe, Shield, Landmark, Flame, Activity } from 'lucide-react';
 import { CITIES_DATA } from '../../data/initialLoreData';
 import { CityFaction } from '../../types/lore';
 import { playTacticalBeep } from '../../utils/sound';
@@ -25,6 +25,12 @@ export const FactionsSection: React.FC = () => {
         return Anchor;
       case 'chinoiserie':
         return Pickaxe;
+      case 'mukri':
+        return Shield;
+      case 'ahente':
+        return Landmark;
+      case 'nashdom':
+        return Flame;
       default:
         return Building2;
     }
@@ -36,7 +42,7 @@ export const FactionsSection: React.FC = () => {
       <div className="relative border border-slate-800 bg-[#0f131a] p-6 sm:p-8 cut-corner-br bg-tactical-grid">
         <div className="flex items-center gap-2 mb-2 text-xs font-mono tracking-widest text-cyan-400">
           <span className="w-2 h-2 bg-cyan-400 inline-block" />
-          <span>FACTION_REGISTRY // ADEM, COASTAL PORTS, ALPINE MINES & OPERATORS</span>
+          <span>FACTION_REGISTRY // ADEM, COASTAL PORTS, ALPINE MINES, PLAIN BASTIONS, CLIFF CITADELS & NORTHERN TRACKS</span>
           <span>·</span>
           <span>STATUS: ACTIVE_INTEL</span>
         </div>
@@ -44,13 +50,13 @@ export const FactionsSection: React.FC = () => {
           주요 세력 및 도시 거점 <span className="text-slate-400 text-xl font-normal">MAJOR FACTIONS & CITADELS</span>
         </h1>
         <p className="mt-2 text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed">
-          오큘러의 창궐과 케루빔 붕괴 재해 속에서 문명을 보존하기 위해 기동하는 거대 이동 도시 플랫폼 ‘아뎀(Adem)’들과 전담 대응 기구(케 에딘, 메네실, 라자로),
-          대륙을 누비는 독립 정보 세력 ‘지옵콕스’, 동부 해안의 대표 항만 도시 ‘피르바(사카나)’, 그리고 혹한의 고산 암벽 광산 도시 ‘시누아즈리(요아)’에 대한 아카이브 기록이다.
+          오큘러의 창궐과 케루빔 붕괴 재해 속에서 문명을 보존하기 위해 기동하는 거대 이동 도시 플랫폼 ‘아뎀(Adem)’들과 전담 대응 기구(케 에딘, 메네실, 라자로, 프롯스자시트),
+          대륙을 누비는 독립 정보 세력 ‘지옵콕스’, 동부 해안의 대표 항만 도시 ‘피르바(사카나)’, 혹한의 고산 암벽 광산 도시 ‘시누아즈리(요아)’, 평야 방벽 요새 도시 ‘무크리(고라이)’, 남서부 절벽과 해안선의 축제 도시 ‘아헨테(슈흘리카)’, 그리고 북부 혹한 험지를 기동하는 소형 이동 도시 ‘나슈돔(프롯스자시트)’에 대한 아카이브 기록이다.
         </p>
       </div>
 
       {/* Citadel & Faction Selector Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-9 gap-3 sm:gap-4">
         {CITIES_DATA.map((city) => {
           const isSelected = city.id === selectedCityId;
           const CityIcon = getCityIcon(city.id);

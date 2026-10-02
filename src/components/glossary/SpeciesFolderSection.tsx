@@ -117,9 +117,9 @@ export const SpeciesFolderSection: React.FC<SpeciesFolderSectionProps> = ({
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] text-emerald-400 font-bold">각인종 계통</span>
                   </div>
-                  <div className="text-sm font-bold text-white">아페 (Ape)</div>
+                  <div className="text-sm font-bold text-white">아페 (Apé)</div>
                   <p className="text-[11px] text-slate-400 font-sans leading-tight">
-                    신체 각질 뿔 발현군 및 건장한 골격. 하위에 뿔 형상별 다수 소분류 분포.
+                    신체 각질 뿔 발현군 및 건장한 골격. 하위에 뿔 형상 및 골격 특성에 따른 소그, 야레츠 등 세부 분파 분포.
                   </p>
                 </div>
 
@@ -130,7 +130,7 @@ export const SpeciesFolderSection: React.FC<SpeciesFolderSectionProps> = ({
                   </div>
                   <div className="text-sm font-bold text-white">알토 (Alto)</div>
                   <p className="text-[11px] text-slate-400 font-sans leading-tight">
-                    등 뒤 1~3쌍 날개 보유 유익종군. 날개 깃털/피막 특성에 따른 세부 소분류.
+                    등 뒤 1~3쌍 날개 보유 유익종군. 두부 귀깃 날개를 지닌 스마우토 등 깃털/피막 특성에 따른 세부 분파 분포.
                   </p>
                 </div>
 

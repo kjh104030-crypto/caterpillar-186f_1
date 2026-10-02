@@ -176,6 +176,14 @@ export const OverviewSection: React.FC<OverviewSectionProps> = ({ onNavigateToSe
                       <span className="text-cyan-400 font-mono">05.</span>
                       <span><strong>고산 암벽과 광산 지대:</strong> 시누아즈리가 위치한 혹한의 고산 지대로, 오큘러의 접근은 없으나 깊은 고립과 토착 생물과의 영역 분쟁이 상존함.</span>
                     </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-cyan-400 font-mono">06.</span>
+                      <span><strong>남서부 해안 단애 및 산악 지대:</strong> 아헨테가 위치한 절벽과 굴곡진 해안선 지대로, 강한 햇빛 속 과수·목축업과 수직 입체 건축 기술 및 연안 오큘러 요격이 전개됨.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-cyan-400 font-mono">07.</span>
+                      <span><strong>북부 거친 설원 및 혹한 험지:</strong> 나슈돔이 초대형 무한궤도로 주파하는 험준한 북방 설원 지대로, 중심 난방 기둥과 강력한 타격·관통 무장을 통한 극한 생존 구역.</span>
+                    </li>
                   </ul>
                 </div>
 
@@ -283,23 +291,46 @@ export const OverviewSection: React.FC<OverviewSectionProps> = ({ onNavigateToSe
                   </span>
                 </div>
                 <h3 className="text-xl font-bold text-white">케루빔 (Cherubim)</h3>
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-line">
                   {CATERPILLAR_INFO.coreMaterials.cherubim.characteristics}
                 </p>
+
+                {/* Sub Features: Raw State & Dust */}
+                <div className="space-y-2 pt-1 text-xs">
+                  <div className="p-3 bg-black/50 border border-slate-800 cut-corner-br">
+                    <span className="font-bold text-cyan-400 font-mono block mb-1">■ 원초 상태 (Raw State)</span>
+                    <p className="text-slate-300 leading-relaxed">
+                      {CATERPILLAR_INFO.coreMaterials.cherubim.rawState}
+                    </p>
+                  </div>
+                  <div className="p-3 bg-black/50 border border-amber-900/40 cut-corner-br">
+                    <span className="font-bold text-amber-400 font-mono block mb-1">■ 분진 특성 및 제거 수칙 (Dust Dynamics)</span>
+                    <p className="text-slate-300 leading-relaxed">
+                      {CATERPILLAR_INFO.coreMaterials.cherubim.dustCharacteristics}
+                    </p>
+                  </div>
+                </div>
 
                 <div className="p-3 bg-red-950/30 border border-red-900/50 cut-corner-br">
                   <div className="text-xs font-bold text-red-400 flex items-center gap-1.5 mb-1">
                     <ShieldAlert className="w-4 h-4" />
-                    붕괴 유발 결함 (CRITICAL_RISK)
+                    붕괴 유발 결함 및 가공 원칙 (CRITICAL_RISK)
                   </div>
                   <p className="text-xs text-red-200/90 leading-relaxed">
                     {CATERPILLAR_INFO.coreMaterials.cherubim.criticalRisk}
                   </p>
                 </div>
 
+                <div className="p-3 bg-slate-950/60 border border-slate-800 text-xs">
+                  <span className="font-bold text-slate-300 font-mono block mb-1">■ 케루빔의 문명적 영향 (Civilizational Impact)</span>
+                  <p className="text-slate-400 leading-relaxed">
+                    {CATERPILLAR_INFO.coreMaterials.cherubim.civilizationImpact}
+                  </p>
+                </div>
+
                 <div className="grid grid-cols-2 gap-2 text-xs font-mono">
                   <div className="p-2 bg-slate-950 border border-slate-800 text-slate-400">
-                    경도 한계치: <span className="text-white">모스 7~8 (석영-황옥)</span>
+                    경도 한계치: <span className="text-white">모스 7~8 (석영-황옥 포화)</span>
                   </div>
                   <div className="p-2 bg-slate-950 border border-slate-800 text-slate-400">
                     붕괴 도달 시간: <span className="text-amber-400">생체 1~1.5h / 시체 5~10m</span>
@@ -316,9 +347,13 @@ export const OverviewSection: React.FC<OverviewSectionProps> = ({ onNavigateToSe
                   </span>
                 </div>
                 <h3 className="text-xl font-bold text-white">오를란도 (Orlando)</h3>
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-line">
                   {CATERPILLAR_INFO.coreMaterials.orlando.characteristics}
                 </p>
+
+                <div className="p-3 bg-cyan-950/40 border border-cyan-800/60 text-xs font-mono text-cyan-200">
+                  <span className="text-cyan-400 font-bold">핵심 조성 원리:</span> 형태는 착용자의 무의식이, 능력은 금속이 조성한다.
+                </div>
 
                 {/* 3 Ability Categories Grid */}
                 <div className="pt-1 space-y-2">

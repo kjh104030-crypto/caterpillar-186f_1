@@ -212,13 +212,21 @@ export const CharacterDetailModal: React.FC<CharacterDetailModalProps> = ({ char
               <div className="p-3 bg-black/60 border border-slate-800 cut-corner-br">
                 <div className="flex justify-between items-center mb-1.5">
                   <span className="text-slate-400">1. 내구력</span>
-                  <span className="text-cyan-300 font-semibold px-1.5 py-0.5 bg-slate-900 border border-slate-700">
+                  <span className={`font-semibold px-1.5 py-0.5 bg-slate-900 border ${
+                    character.physicalExam.durability === '미흡' || character.physicalExam.durability === '부족'
+                      ? 'text-amber-400/90 border-amber-900/60'
+                      : 'text-cyan-300 border-slate-700'
+                  }`}>
                     {character.physicalExam.durability}
                   </span>
                 </div>
                 <div className="w-full bg-slate-800 h-1.5 overflow-hidden">
                   <div 
-                    className="bg-cyan-400 h-full" 
+                    className={`h-full ${
+                      character.physicalExam.durability === '미흡' || character.physicalExam.durability === '부족'
+                        ? 'bg-amber-500'
+                        : 'bg-cyan-400'
+                    }`} 
                     style={{ 
                       width: character.physicalExam.durability === '우수' 
                         ? '90%' 
@@ -266,13 +274,21 @@ export const CharacterDetailModal: React.FC<CharacterDetailModalProps> = ({ char
               <div className="p-3 bg-black/60 border border-slate-800 cut-corner-br">
                 <div className="flex justify-between items-center mb-1.5">
                   <span className="text-slate-400">3. 전술 이해도</span>
-                  <span className="text-cyan-300 font-semibold px-1.5 py-0.5 bg-slate-900 border border-slate-700">
+                  <span className={`font-semibold px-1.5 py-0.5 bg-slate-900 border ${
+                    character.physicalExam.tacticalUnderstanding === '미흡' || character.physicalExam.tacticalUnderstanding === '부족'
+                      ? 'text-amber-400/90 border-amber-900/60'
+                      : 'text-cyan-300 border-slate-700'
+                  }`}>
                     {character.physicalExam.tacticalUnderstanding}
                   </span>
                 </div>
                 <div className="w-full bg-slate-800 h-1.5 overflow-hidden">
                   <div 
-                    className="bg-cyan-400 h-full" 
+                    className={`h-full ${
+                      character.physicalExam.tacticalUnderstanding === '미흡' || character.physicalExam.tacticalUnderstanding === '부족'
+                        ? 'bg-amber-500'
+                        : 'bg-cyan-400'
+                    }`} 
                     style={{ 
                       width: character.physicalExam.tacticalUnderstanding === '우수' 
                         ? '90%' 
@@ -361,6 +377,8 @@ export const CharacterDetailModal: React.FC<CharacterDetailModalProps> = ({ char
                         ? '95%' 
                         : (character.physicalExam.specialAbilityValue || character.physicalExam.terrainUtilization) === '양호' 
                         ? '75%' 
+                        : (character.physicalExam.specialAbilityValue || character.physicalExam.terrainUtilization)?.includes('표준~양호')
+                        ? '68%'
                         : '60%' 
                     }} 
                   />
@@ -396,11 +414,11 @@ export const CharacterDetailModal: React.FC<CharacterDetailModalProps> = ({ char
           <div className="p-4 bg-slate-900/70 border border-slate-800 cut-corner-br">
             <h4 className="text-xs font-mono text-slate-400 mb-1 flex items-center gap-1.5">
               <FileText className="w-3.5 h-3.5 text-cyan-400" />
-              신상 명세 및 배경 기록 (BIOGRAPHICAL_LOG)
+              {character.bioTitle || '신상 명세 및 배경 기록 (BIOGRAPHICAL_LOG)'}
             </h4>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed whitespace-pre-line">
+            <div className="text-xs sm:text-sm text-slate-300 leading-relaxed whitespace-pre-line space-y-1">
               {character.bioNotes}
-            </p>
+            </div>
           </div>
 
           <div className="p-4 bg-slate-900/70 border border-slate-800 cut-corner-br">
